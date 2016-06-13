@@ -1,0 +1,19 @@
+model {
+  ## Likelihood
+  for (i in 1:ng) {
+    y[i,1] ~ dnegbin(ymu[i,1]/(ymu[i,1]+ymu[i,1]^2*omega[1]), 1/omega[1])
+    log(ymu[i,1]) <- log(ytr[1]) + alpha[i]
+    y[i,2] ~ dnegbin(ymu[i,2]/(ymu[i,2]+ymu[i,2]^2*omega[2]), 1/omega[2])
+    log(ymu[i,2]) <- log(ytr[2]) + alpha[i] + beta[i] + gamma[i]
+  }
+
+  ## Prior
+  for (i in 1:ng) {
+    alpha[i] ~ dnorm(ma[i], sa[i]^(-2))
+    beta[i] ~ dnorm(mb[i], sb[i]^(-2))
+    gamma[i] ~ dt(mg, sigma^(-2), 5)
+  }
+  mg ~ dnorm(0, 0.001)
+  log.sigma ~ dunif(-2, 2)
+  sigma <- exp(log.sigma)
+}
