@@ -1,4 +1,4 @@
-read.deepn <- function(nFiles, sFiles) {
+readDeepn <- function(nFiles, sFiles) {
   if (length(nFiles)!=length(sFiles)) stop("Number of replicates under selection must equal number of repliates in non-selected conditions")
   K <- length(nFiles)
   for (k in 1:K) {
