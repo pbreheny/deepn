@@ -7,7 +7,9 @@ importFromDeepn <- function(file) {
   vs <- val[grep("Vector_Sel", key)]
   bn <- val[grep("Bait._Non", key)]
   bs <- val[grep("Bait._Sel", key)]
-  Vector <- readDeepn(vn, vs)
-  Bait <- readDeepn(bn, bs)
-  Data <- list(Vector=Vector, Bait=Bait)
+  Data <- list(Vector = readDeepn(vn, vs),
+               Bait = readDeepn(bn, bs),
+               Threshold = val[key=="Threshold"])
+  if (!all.equal(dimnames(Data$Vector)[[1]], dimnames(Data$Bait)[[1]])) stop("Genes don't match between vector and bait")
+  Data
 }
