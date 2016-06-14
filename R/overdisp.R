@@ -1,4 +1,6 @@
-overdisp <- function(Y, ind=1:ncol(Y)) {
-  dge <- DGEList(counts=Y[,ind], group=Group[ind])
-  estimateCommonDisp(dge)$common.dispersion
+overdisp <- function(Data) {
+  omega <- c(estimateCommonDisp(DGEList(Data$Vector[,1,]))$common.dispersion,
+             estimateCommonDisp(DGEList(Data$Vector[,2,]))$common.dispersion)
+  names(omega) <- dimnames(Data$Vector)[[2]]
+  omega
 }
