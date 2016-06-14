@@ -1,7 +1,4 @@
 applyFilter <- function(Data, thresh) {
-  if (missing(thresh)) {
-    thresh <- Data$Threshold
-  }
 
   # Base filter
   v <- apply(Data$Vector[,1,], 1, mean)
