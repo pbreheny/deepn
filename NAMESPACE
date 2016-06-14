@@ -1,1 +1,1 @@
-export(bmcmc)
+export(bmcmc, read.deepn, overdisp)
