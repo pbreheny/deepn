@@ -6,8 +6,7 @@ import <- function(vn, vs, bn, bs) {
   list(Vector = Vector,
        Bait = Bait,
        arrayBait = arrayBait,
-       Gene = dimnames(Vector)[[1]],
-       vtr <- apply(Vector, 2:3, sum),
-       btr <- ifelse(arrayBait, apply(Bait, 2:3, sum), apply(Bait, 2, sum))
+       vtr = apply(Vector, 2:3, sum),
+       btr = if (arrayBait) apply(Bait, 2:3, sum) else apply(Bait, 2, sum)
   )
 }

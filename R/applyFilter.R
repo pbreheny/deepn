@@ -1,43 +1,34 @@
 applyFilter <- function(Data, thresh) {
+  rpm <- RPM(Data)
 
-  # Base filter
-  v <- apply(Data$Vector[,1,], 1, mean)
-  if ("Bait" %in% names(Data)) {
-    arrayBait <- length(dim(Data$Bait)) > 2
-    if (arrayBait) {
-      B <- cbind(v, Data$Bait[,1,])
-    } else {
-      B <- cbind(v, Data$Bait[,1])
-    }
+  # Nonsel filter
+  if (Data$arrayBait) {
+    N <- cbind(apply(rpm$Vector[,1,], 1, mean), rpm$Bait[,1,])
   } else {
-    B <- matrix(v, ncol=1)
+    N <- cbind(apply(rpm$Vector[,1,], 1, mean), rpm$Bait[,1])
   }
-  BPPM <- sweep(B, 2, apply(B, 2, sum), '/')*1e6
-  bPass <- apply(BPPM > thresh, 1, all)
+  bPass <- apply(N > thresh, 1, all)
 
   # Sel filter
-  if ("Bait" %in% names(Data)) {
-    v <- apply(Data$Vector[,2,], 1, mean)
-    if (arrayBait) {
-      S <- cbind(v, Data$Bait[,2,])
-    } else {
-      S <- cbind(v, Data$Bait[,2])
-    }
-    SPPM <- sweep(S, 2, apply(S, 2, sum), '/')*1e6
-    sPass <- apply(SPPM > thresh, 1, any)
+  if (Data$arrayBait) {
+    S <- cbind(rpm$Vector[,2,], rpm$Bait[,2,])
   } else {
-    sPass <- rep(TRUE, length(bPass))
+    S <- cbind(rpm$Vector[,2,], rpm$Bait[,2])
   }
+  sPass <- apply(S > thresh, 1, any)
 
   # Subset and return
   ind <- which(bPass & sPass)
   Data$Vector <- Data$Vector[ind,,]
-  if ("Bait" %in% names(Data)) {
-    if (arrayBait) {
-      Data$Bait <- Data$Bait[ind,,]
-    } else {
-      Data$Bait <- Data$Bait[ind,]
-    }
-  }
+  Data$Bait <- if (Data$arrayBait) Data$Bait[ind,,] else Data$Bait[ind,]
   Data
+}
+RPM <- function(Data) {
+  Vector <- sweep(Data$Vector, 2:3, Data$vtr, "/")*1e6
+  if (Data$arrayBait) {
+    Bait <- sweep(Data$Vector, 2:3, Data$btr, "/")*1e6
+  } else {
+    Bait <- sweep(Data$Vector, 2, Data$btr, "/")*1e6
+  }
+  list(Vector=Vector, Bait=Bait)
 }
