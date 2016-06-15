@@ -1,4 +1,4 @@
-psm <- function(mcfile="mcmc.RData", outfile="psm.RData") {
+psm <- function(mcfile="mcmc.RData") {
   load(mcfile)
   X <- as.matrix(jagsfit$mcmc)
   pmx <- apply(X, 2, median)
@@ -12,5 +12,6 @@ psm <- function(mcfile="mcmc.RData", outfile="psm.RData") {
     ps[i[m],j[m]] <- psx[m]
   }
   dimnames(pm) <- dimnames(ps) <- dimnames(Data$Bait)[c(1,3)]
-  save(Data, pm, ps, file=outfile)
+  structure(list(Data=Data, pm=pm, ps=ps),
+            class = "psm.deepn")
 }

@@ -10,4 +10,5 @@ License: GPL-3
 SystemRequirements: JAGS (http://mcmc-jags.sourceforge.net)
 Depends: rjags, runjags, edgeR
 Suggests:
+biocViews:
 VignetteBuilder: knitr
