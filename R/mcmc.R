@@ -1,4 +1,4 @@
-mcmc <- function(Data, outfile="mcmc.RData", n.chains=4, debug=TRUE) {
+runMCMC <- function(Data, outfile="mcmc.RData", n.chains=4, debug=TRUE) {
   # Setup
   ng <- dim(Data$Vector)[1]
   nvr <- dim(Data$Vector)[3]

@@ -1,13 +1,13 @@
 Package: deepn
-Title: What the package does (short line)
-Version: 1.0
-Date: 2016-06-13
+Title: Dynamic Enrichment for Evaluation of Protein Networks
+Version: 0.0
+Date: 2016-06-16
 Author: Patrick Breheny
 Maintainer: Patrick Breheny <patrick-breheny@uiowa.edu>
-Description: More about what it does (maybe more than one line)
-BugReports: http://github.com/pbreheny/grpreg/issues
+Description: This is the accompanying R package for the DEEPN project <https://github.com/emptyewer/DEEPN>.
+BugReports: http://github.com/pbreheny/deepn/issues
 License: GPL-3
 SystemRequirements: JAGS (http://mcmc-jags.sourceforge.net)
-Depends: rjags, runjags, coda, edgeR
-Suggests: 
+Depends: rjags, runjags, edgeR
+Suggests:
 VignetteBuilder: knitr
