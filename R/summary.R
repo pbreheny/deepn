@@ -51,4 +51,3 @@ summary.psm.deepn <- function(object) {
 ppm <- function(x) {
   x / sum(x) * 1e6
 }
-}
