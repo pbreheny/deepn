@@ -1,1 +1,1 @@
-export(readDeepn, import, importFromDeepn, applyFilter, overdisp, bmcmc)
+export(readDeepn, import, importFromDeepn, applyFilter, overdisp, mcmc)
