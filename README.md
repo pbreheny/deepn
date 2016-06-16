@@ -23,9 +23,15 @@ Once installed, `deepn` can be used to analyze the output from `deepn` with
 
 ```r
 require(deepn)
-Data <- importFromDeepn("deepn.config")
-Data$omega <- overdisp(Data)
-runMCMC(Data) 
+analyzeDeepn("deepn.config")
 ```
 
-where `"deepn.config"` is the name of the configuration file that DEEPN outputs containing path names to all the `.csv` files needed in the analysis.
+where `"deepn.config"` is the name of the configuration file that DEEPN outputs containing path names to all the `.csv` files needed in the analysis.  This will create a file, `stat.csv`, containing a table of summary statistics for each gene.
+
+The above analysis may take a while to run, depending on the threshold.  To run a "quick" version of the analysis, you can use
+
+```r
+analyzeDeepn("deepn.config", debug=TRUE)
+```
+
+which applies a very high PPM threshold of 200 prior to analysis, so that it should only take a minute or two to complete.
