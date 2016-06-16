@@ -1,2 +1,3 @@
-export(readDeepn, import, importFromDeepn, applyFilter, overdisp, runMCMC, psm)
+export(readDeepn, import, importFromDeepn, applyFilter, overdisp, runMCMC, psm,
+       analyzeDeepn)
 S3method(summary, psm.deepn)
