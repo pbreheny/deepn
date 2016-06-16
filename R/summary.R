@@ -1,4 +1,4 @@
-summary.psm.deepn <- function(object) {
+summary.psm.deepn <- function(object, outfile) {
   pm <- object$pm
   ps <- object$ps
 

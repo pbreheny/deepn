@@ -26,9 +26,9 @@ applyFilter <- function(Data, thresh) {
 RPM <- function(Data) {
   Vector <- sweep(Data$Vector, 2:3, Data$vtr, "/")*1e6
   if (Data$arrayBait) {
-    Bait <- sweep(Data$Vector, 2:3, Data$btr, "/")*1e6
+    Bait <- sweep(Data$Bait, 2:3, Data$btr, "/")*1e6
   } else {
-    Bait <- sweep(Data$Vector, 2, Data$btr, "/")*1e6
+    Bait <- sweep(Data$Bait, 2, Data$btr, "/")*1e6
   }
   list(Vector=Vector, Bait=Bait)
 }
