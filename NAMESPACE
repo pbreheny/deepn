@@ -1,3 +1,8 @@
+import("stats")
+import("utils")
+import("runjags")
+import("rjags")
+import("edgeR")
 export(readDeepn, import, importFromDeepn, applyFilter, overdisp, runMCMC, psm,
        analyzeDeepn)
 S3method(summary, psm.deepn)

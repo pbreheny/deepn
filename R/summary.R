@@ -1,6 +1,6 @@
-summary.psm.deepn <- function(object, sort=FALSE, outfile) {
-  Vector <- deepn:::RPM(object$Data)$Vector
-  Bait <- deepn:::RPM(object$Data)$Bait
+summary.psm.deepn <- function(object, sort=FALSE, outfile, ...) {
+  Vector <- RPM(object$Data)$Vector
+  Bait <- RPM(object$Data)$Bait
   multi <- object$Data$multiBait
   Gene <- dimnames(Vector)[[1]]
   pm <- object$pm

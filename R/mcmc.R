@@ -1,4 +1,4 @@
-runMCMC <- function(Data, outfile="mcmc.RData", n.chains=4) {
+runMCMC <- function(Data, n.chains=4) {
   # Setup
   ng <- dim(Data$Vector)[1]
   nvr <- dim(Data$Vector)[3]
@@ -19,5 +19,5 @@ runMCMC <- function(Data, outfile="mcmc.RData", n.chains=4) {
   runjags.options(rng.warning=FALSE)
   jagsfit <- run.jags(model, monitor=monitor, data=jData, inits=inits, n.chains=n.chains,
                       method="rjparallel", adapt=1500, burnin=1500, sample=1500, summarise=FALSE)
-  save(jagsfit, Data, file=outfile)
+  list(jagsfit=jagsfit, Data=Data)
 }
