@@ -3,7 +3,7 @@ runMCMC <- function(Data, outfile="mcmc.RData", n.chains=4) {
   ng <- dim(Data$Vector)[1]
   nvr <- dim(Data$Vector)[3]
   monitor <- c('gamma')
-  if (Data$arrayBait) {
+  if (Data$multiBait) {
     nb <- dim(Data$Bait)[3]
     jData <- with(Data, list(v=Vector, y=Bait, ng=ng, nb=nb, nvr=nvr, ytr=btr, vtr=vtr, omega=omega))
     model <- system.file("model/sModel2.jag", package="deepn")

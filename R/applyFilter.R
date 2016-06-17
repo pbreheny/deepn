@@ -2,7 +2,7 @@ applyFilter <- function(Data, thresh) {
   rpm <- RPM(Data)
 
   # Nonsel filter
-  if (Data$arrayBait) {
+  if (Data$multiBait) {
     N <- cbind(apply(rpm$Vector[,1,], 1, mean), rpm$Bait[,1,])
   } else {
     N <- cbind(apply(rpm$Vector[,1,], 1, mean), rpm$Bait[,1])
@@ -10,7 +10,7 @@ applyFilter <- function(Data, thresh) {
   bPass <- apply(N > thresh, 1, all)
 
   # Sel filter
-  if (Data$arrayBait) {
+  if (Data$multiBait) {
     S <- cbind(rpm$Vector[,2,], rpm$Bait[,2,])
   } else {
     S <- cbind(rpm$Vector[,2,], rpm$Bait[,2])
@@ -20,12 +20,12 @@ applyFilter <- function(Data, thresh) {
   # Subset and return
   ind <- which(bPass & sPass)
   Data$Vector <- Data$Vector[ind,,]
-  Data$Bait <- if (Data$arrayBait) Data$Bait[ind,,] else Data$Bait[ind,]
+  Data$Bait <- if (Data$multiBait) Data$Bait[ind,,] else Data$Bait[ind,]
   Data
 }
 RPM <- function(Data) {
   Vector <- sweep(Data$Vector, 2:3, Data$vtr, "/")*1e6
-  if (Data$arrayBait) {
+  if (Data$multiBait) {
     Bait <- sweep(Data$Bait, 2:3, Data$btr, "/")*1e6
   } else {
     Bait <- sweep(Data$Bait, 2, Data$btr, "/")*1e6

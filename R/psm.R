@@ -1,7 +1,7 @@
 psm <- function(mcfile="mcmc.RData") {
   load(mcfile)
   X <- as.matrix(jagsfit$mcmc)
-  if (Data$arrayBait) {
+  if (Data$multiBait) {
     dim(X) <- c(nrow(X), dim(Data$Bait)[1], dim(Data$Bait)[3])
     pm <- cbind(apply(X, 2:3, median), apply(X[,,2]-X[,,1], 2, median))
     ps <- cbind(apply(X, 2:3, mad), apply(X[,,2]-X[,,1], 2, mad))
