@@ -4,5 +4,5 @@ import("runjags")
 import("rjags")
 import("edgeR")
 export(readDeepn, import, importFromDeepn, applyFilter, overdisp, runMCMC, psm,
-       analyzeDeepn)
+       analyzeDeepn, msdPlot, mcvPlot, msfPlot)
 S3method(summary, psm.deepn)
