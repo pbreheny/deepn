@@ -25,4 +25,3 @@ A \code{deepn} object.
 \examples{
 \dontrun{applyFilter(Data, 3)}
 }
-}
