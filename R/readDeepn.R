@@ -5,7 +5,7 @@ readDeepn <- function(nFiles, sFiles) {
     for (j in 1:2) {
       # Read in raw
       if (j==1) fn <- nFiles[k] else fn <- sFiles[k]
-      rawData <- read.csv(fn, stringsAsFactors=FALSE, skip=4, header=FALSE)
+      rawData <- read.csv(fn, colClasses=c(V1="character", V2="character", V3="numeric"), skip=4, header=FALSE, flush=TRUE)
       if (k==1 & j==1) {
         Gene <- gsub(' ', '', rawData$V2)
       } else {
