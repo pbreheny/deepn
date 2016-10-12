@@ -1,0 +1,9 @@
+# 1.2-0 (2016-10-12)
+  * Estimates presence of bait effects and returns warning to DEEPN if detected.
+
+# 1.1-0 (2016-10-06)
+  * Overdispersion estimates returned to DEEPN over localhost socket
+
+# 1.0-0 (2016-08-12)
+  * Initial release
+  * Compatible with DEEPN and Statmaker
