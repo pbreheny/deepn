@@ -13,7 +13,7 @@ summary.psm.deepn <- function(object, sort=FALSE, outfile, ...) {
   Vec <- apply(Vector[,2,], 1, mean)
   if (multi) {
     Enr1 <- log2((Bait[,2,1]+0.05)/(Vec+0.05))
-    Enr2 <- log2((Bait[,2,1]+0.05)/(Vec+0.05))
+    Enr2 <- log2((Bait[,2,2]+0.05)/(Vec+0.05))
     Tab <- data.frame(
       Gene = Gene,
       Base = Base,
