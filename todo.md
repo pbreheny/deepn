@@ -1,6 +1,6 @@
 - [x] Works for single bait
 - [x] Works for multiple baits
 - [ ] Works for bait replicates
-- [ ] Works with DEEPN's Statmaker
+- [x] Works with DEEPN's Statmaker
 - [x] Code passes R CMD check
 - [ ] R documentation
