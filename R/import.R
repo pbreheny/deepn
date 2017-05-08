@@ -8,10 +8,12 @@ import <- function(vn, vs, bn, bs) {
   } else {
     Bait <- multiBait <- btr <- NULL
   }
-  list(Vector = Vector,
-       Bait = Bait,
-       multiBait = multiBait,
-       vtr = apply(Vector, 2:3, sum),
-       btr = btr
-  )
+  Counts <- list(Vector=Vector, Bait=Bait)
+  structure(list(Counts=Counts,
+                 Vector=Vector,
+                 Bait=Bait,
+                 multiBait = multiBait,
+                 vtr = apply(Vector, 2:3, sum),
+                 btr = btr),
+            class="data.deepn")
 }

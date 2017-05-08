@@ -1,27 +1,13 @@
-summary.psm.deepn <- function(object, sort=FALSE, outfile, ...) {
-  Vector <- rpm(object$Data)$Vector
-  Bait <- rpm(object$Data)$Bait
+summary.psm.deepn <- function(object, sort=FALSE, allGenes=FALSE, outfile, ...) {
   multi <- object$Data$multiBait
-  Gene <- dimnames(Vector)[[1]]
+  sData <- summary(object$Data)
+
+  # Summarize psm
   pm <- object$pm
   ps <- object$ps
   Z <- pm/ps
-
-  # Raw PPMs
-  B <- cbind(Vector[,1,], if (multi) Bait[,1,] else Bait[,1])
-  Base <- apply(B, 1, mean)
-  Vec <- apply(Vector[,2,], 1, mean)
   if (multi) {
-    Enr1 <- log2((Bait[,2,1]+0.05)/(Vec+0.05))
-    Enr2 <- log2((Bait[,2,2]+0.05)/(Vec+0.05))
-    Tab <- data.frame(
-      Gene = Gene,
-      Base = Base,
-      Vec = Vec,
-      Bait1 = Bait[,2,1],
-      Bait2 = Bait[,2,2],
-      Enr1 = Enr1,
-      Enr2 = Enr2,
+    sPSM <- data.frame(
       AdjEnr1 = pm[,1]/log(2),
       AdjEnr2 = pm[,2]/log(2),
       pBait1_Vec = pnorm(Z[,1]),
@@ -32,17 +18,24 @@ summary.psm.deepn <- function(object, sort=FALSE, outfile, ...) {
       pBait2 = pnorm(Z[,2])*pnorm(Z[,3])
     )
   } else {
-    Enr <- log2((Bait[,2]+0.05)/(Vec+0.05))
-    Tab <- data.frame(
-      Gene = Gene,
-      Base = Base,
-      Vec = Vec,
-      Bait = Bait[,2],
-      Enr = Enr,
+    sPSM <- data.frame(
       AdjEnr = pm/log(2),
       p = pnorm(Z)
     )
   }
+
+  # Merge
+  pass <- rownames(sData) %in% dimnames(object$Data$Vector)[[1]]
+  if (allGenes) {
+    sPSM_NULL <- sPSM[1,]
+    sPSM_NULL[] <- NA
+    Tab <- rbind(cbind(sData[pass,], sPSM),
+                 cbind(sData[!pass,], sPSM_NULL))
+  } else {
+    Tab <- cbind(sData[pass,], sPSM)
+  }
+
+  # Sort
   m <- ncol(Tab)
   if (multi) {
     if (sort==1) {
@@ -53,9 +46,12 @@ summary.psm.deepn <- function(object, sort=FALSE, outfile, ...) {
   } else {
     if (sort) Tab <- Tab[order(-Tab[,m]),]
   }
+
+  # Output
   if (!missing(outfile)) {
+    Tab <- cbind(Gene=rownames(Tab), Tab)
     write.csv(Tab, file=outfile, quote=FALSE, row.names=FALSE)
   } else {
-    return(Tab[,-1])
+    return(Tab)
   }
 }
