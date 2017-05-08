@@ -1,7 +1,7 @@
 Package: deepn
 Title: Dynamic Enrichment for Evaluation of Protein Networks
-Version: 1.3-0
-Date: 2016-06-16
+Version: 1.4-0
+Date: 2017-05-08
 Author: Patrick Breheny
 Maintainer: Patrick Breheny <patrick-breheny@uiowa.edu>
 Description: This is the accompanying R package for the DEEPN project <https://github.com/emptyewer/DEEPN>.
