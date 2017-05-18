@@ -17,4 +17,5 @@ chooseFilter <- function(Data, minRPM=1, maxRPM=100, plot=FALSE, ...) {
   #print(cbind(thresh, g2, o2, (g2 - min(g2)) / (max(g2) - min(g2)), (max(o2) - o2) / (max(o2) - min(o2))))
   #score <- (max(o2) - o2) / (max(o2) - min(o2)) + (g2 - min(g2)) / (max(g2) - min(g2))
   #thresh[which.max(score)]
+  invisible(data.frame(Threshold=thresh, Genes=g, Overdispersion=o))
 }
