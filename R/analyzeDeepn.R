@@ -1,6 +1,5 @@
-analyzeDeepn <- function(infile, outfile="stat.csv", msgfile="messages.txt", dspfile="overdisp.csv", debug=FALSE, sort=1) {
+analyzeDeepn <- function(infile, outfile="stat.csv", msgfile="messages.txt", debug=FALSE, sort=1) {
   Data <- importFromDeepn(infile)
-  write.csv(chooseFilter(Data, plot=FALSE), file=dspfile, row.names=FALSE)
   Data$omega <- overdisp(Data)
   out <- c("Overdispersion estimates",
            paste("Baseline (vector only):   ", formatC(Data$omega["Baseline"], digits=2, format="f")),
