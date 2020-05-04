@@ -11,10 +11,10 @@ source("https://bioconductor.org/biocLite.R")
 biocLite()
 ```
 
-Once that is done, you can install `deepn` via `devtools` (which itself can be installed via `install.packages("devtools")`):
+Once that is done, you can install `deepn` via `remotes` (which itself can be installed via `install.packages("remotes")`):
 
 ```r
-devtools::install_github("pbreheny/deepn")
+remotes::install_github("pbreheny/deepn")
 ```
 
 ## Basic usage
